@@ -23,11 +23,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    # ✅ Authenticate with Service Account JSON
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
       with:
-        workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
-        service_account: ${{ secrets.GCP_DEPLOY_SA }}
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
     - name: Configure Docker
       run: gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
